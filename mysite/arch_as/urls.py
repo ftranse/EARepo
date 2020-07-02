@@ -14,4 +14,3 @@ urlpatterns = [
         path('archas_as_view/', views.as_view, name='as_view'),
         path('archas_category_view/', views.category_view, name='category_view'),
 ]
-
