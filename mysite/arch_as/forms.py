@@ -2,8 +2,10 @@ from django.forms import ModelForm
 from django import forms
 from .models import Interaction
 
+
 class NameForm(forms.Form):
-        your_name = forms.CharField(label='Your name', max_length=100)
+    your_name = forms.CharField(label='Your name', max_length=100)
+
 
 class InteractionForm(ModelForm):
     class Meta:
@@ -11,7 +13,7 @@ class InteractionForm(ModelForm):
         fields = [
             'code',
             'int_type',
-            'protocol', 
+            'protocol',
             'as_provider',
             'fp_provider',
             'description',

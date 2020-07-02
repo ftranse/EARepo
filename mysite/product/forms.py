@@ -4,6 +4,7 @@ import re
 from django.core.exceptions import ValidationError
 from django.shortcuts import get_object_or_404
 
+
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
@@ -21,4 +22,3 @@ class ProductForm(forms.ModelForm):
         if re.match(r'\d', title):
             raise ValidationError('Название не должно начинаться с цифры')
         return title
-

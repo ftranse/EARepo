@@ -8,6 +8,7 @@ from .models import Product, Category
 from .forms import ProductForm
 from .utils import MyMixin
 
+
 class HomeProduct(MyMixin, ListView):
     model = Product
     template_name = 'product/home_product_list.html'
@@ -46,9 +47,10 @@ class ViewProduct(DetailView):
     model = Product
     context_object_name = 'product_item'
 
+
 class CreateProduct(LoginRequiredMixin, CreateView):
     form_class = ProductForm
     template_name = 'product/add_product.html'
     # success_url = reverse_lazy('home')
-    #login_url = '/admin/'
+    # login_url = '/admin/'
     raise_exception = True
