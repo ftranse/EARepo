@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Архитектура АС</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
+  </head>
+  <body>
+	
+	<div class="container">
+		<hr>
+		<h5>Создать новое взаимодействие</h5>
+		<p> </p>
+		<form action="/archas/as/1/add_int" method="post">
+			<table class="table table-sm">
+			
+			<input type="hidden" name="csrfmiddlewaretoken" value="9Yed4kDSwdcRP8zxp3XADuGAUjh8InP3VM8egOw9ZWispwh9Nlnxh8dcy2494tf6">
+			<tr><th><label for="id_name">Interaction Name:</label></th><td><input type="text" name="name" maxlength="10" required id="id_name"></td></tr>
+			<tr><th><label for="id_intType">Interaction Type:</label></th><td><input type="text" name="intType" maxlength="10" required id="id_intType"></td></tr>
+			<tr><th><label for="id_protocol">Protocol:</label></th><td><input type="text" name="protocol" maxlength="10" required id="id_protocol"></td></tr>
+			<tr><th><label for="id_comment">Additional Comments:</label></th><td><input type="text" name="comment" maxlength="1000" required id="id_comment"></td></tr>
+			
+			<tr><td><button type="submit" class="btn btn-primary">Создать</button></td></tr>
+			</table>
+		</form>
+		
+		<hr/>
+		
+		
+		<form>
+		  <div class="form-group">
+			<label for="code_input">Код</label>
+			<input type="text" class="form-control" id="code_input" aria-describedby="codeHelp" placeholder="Код взаимодействия из КА ФО">
+			<small id="codeHelp" class="form-text text-muted">Код взаимодействия из КА ФО</small>
+		  </div>
+		  <div class="form-group">
+			<label for="int_type">Тип</label>
+			<input type="text" class="form-control" id="int_type" aria-describedby="typeHelp" placeholder="Тип взаимодействия">
+			<small id="typeHelp" class="form-text text-muted">Файл/Онлайн</small>
+		  </div>
+		  <button type="submit" class="btn btn-primary">Создать</button>
+		</form>
+
+	
+	
+	</div>
+  
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+	
+  </body>
+</html>

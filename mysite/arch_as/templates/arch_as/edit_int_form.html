@@ -1,0 +1,16 @@
+{% extends "arch_as/base.html" %}
+
+{% block title %}Архитектура АС - Редактирование взаимодействия АС{% endblock %}
+
+{% block content %}
+		<hr>
+		<h5>Создать новое взаимодействие</h5>
+		<p> </p>
+        <form action="{% url 'arch_as:edit_int' int_id %}" method="post">
+            {% csrf_token %}
+			<table class="table table-sm">
+                {{ form }}
+                <tr><td><button type="submit" class="btn btn-primary">Сохранить изменения</button></td></tr>
+			</table>
+        </form>
+{% endblock %}

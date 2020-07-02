@@ -1,0 +1,145 @@
+{% extends "arch_as/base.html" %}
+
+{% block title %}Архитектура АС{% endblock title %}
+
+{% block content %}
+
+<h1>СУОР</h1>
+<small><i>Архитектура АС</i></small>
+<h5>Описание АС</h5>
+<p>
+Целью внедрения СУОР в ОАО «Сбербанк России» является повышение эффективности работы и устойчивости бизнеса ОАО «Сбербанк России» за счет качественного управления операционными рисками, своевременного выявления потенциальных угроз, снижения потерь при реализации операционных рисков, оптимизации процессов ОАО «Сбербанк России» направленных на:
+
+повышение эффективности выявления рисков; превентивный подход к управлению – фокусировка на угрозах, а не на реализовавшихся потерях;
+снижение потенциальных угроз, в т.ч. обусловленных возможными финансовыми кризисами;
+выполнение количественной оценки операционных рисков на основе современных математических моделей;
+создание всех необходимых условий для перехода к использованию в ОАО «Сбербанк России» продвинутого подхода» (Advanced Measurement Approach);
+повышение культуры риск-менеджмента в ОАО «Сбербанк России»;
+поддержание и улучшение имиджа ОАО «Сбербанк России» для клиентов, партнеров и регулятора.
+</p>
+
+<h5>Уровень критичности</h5>
+<p>Business Critical
+</p>
+
+<h5>Взаимодействия АС</h5>
+
+<table id="table" 
+			 data-toggle="table"
+			 data-search="true"
+			 data-filter-control="true" 
+			 data-show-export="true"
+			 data-click-to-select="true"
+			 data-toolbar="#toolbar"
+       class="table-responsive">
+	<thead>
+		<tr>
+            <th rowspan="2" data-field="id" data-filter-control="input" data-sortable="true">#</th>
+			<th rowspan="2" data-field="сode" data-filter-control="input" data-sortable="true">Код</th>
+			<th rowspan="2" data-field="int_type" data-filter-control="select" data-sortable="true">Тип</th>
+			<th rowspan="2" data-field="protocol" data-filter-control="select" data-sortable="true">Протокол</th>
+			<th rowspan="2" data-field="as_provider" data-filter-control="select" data-sortable="true">АС Поставщик</th>
+			<th rowspan="2" data-field="fp_provider" data-filter-control="select" data-sortable="true">ФП поставщик</th>
+			<th rowspan="2" data-field="description" >Описание</th>
+			<th rowspan="2" data-field="status" data-filter-control="select" data-sortable="true">Статус</th>
+			<th rowspan="2" data-field="iniciator" data-filter-control="select" data-sortable="true">Инициатор</th>
+			<th rowspan="2" data-field="int_technology" data-filter-control="select" data-sortable="true">Технология взаимодействия</th>
+			<th rowspan="1" colspan="7">Потребитель</th>
+			<th rowspan="1" colspan="5">Передаваемые данные</th>
+			<th rowspan="1" colspan="6">Регламент выгрузки</th>
+			<th rowspan="1" colspan="3">Размер файла</th>
+			<th rowspan="1" colspan="3">Информационная безопасность</th>
+			<th rowspan="2" colspan="1" data-field="architecture_standard_complience">Соответсвтие стандартам архитектуры</th>
+			<th rowspan="2" colspan="1" data-field="int_comment">Комментарий</th>
+            <th rowspan="2" colspan="1">Действия</th>
+		</tr>
+		<tr>
+			<th data-field="consumer_status">Статус</th>
+			<th data-field="consumer_date">Срок</th>
+			<th data-field="consumer_as">АС</th>
+			<th data-field="consumer_role">Роль</th>
+			<th data-field="consumer_process">Процесс</th>
+			<th data-field="consumer_sla">SLA</th>
+			<th data-field="consumer_comment">Комментарий</th>
+			
+			<th data-field="data_description">Описание</th>
+			<th data-field="data_encoding">Кодировка</th>
+			<th data-field="data_format">Формат</th>
+			<th data-field="data_confidential_level">Категория конфиденциальности</th>
+			<th data-field="data_integrity_level">Категория целостности</th>
+			
+			<th data-field="schedule_initiation">Инициация</th>
+			<th data-field="schedule_year">Год</th>
+			<th data-field="schedule_month">Месяц</th>
+			<th data-field="schedule_week">Неделя</th>
+			<th data-field="schedule_day">День</th>
+			<th data-field="schedule_load_profile">Характер нагрузки</th>
+			
+			<th data-field="filesize_min">Мин</th>
+			<th data-field="filesize_max">Макс</th>
+			<th data-field="filesize_avg">Средний</th>
+			
+			<th data-field="security_ssl_tls">SSL/TLS</th>
+			<th data-field="security_encription">Шифрование</th>
+			<th data-field="security_digital_signature">ЭП</th>			
+		</tr>
+	</thead>
+	<tbody>
+    {% if int_list %}
+		{% for int in int_list %}
+
+		<tr>
+			<td>{{ int.id  }}</td>
+			<td>{{ int.code  }}</td>
+			<td>{{ int.int_type }}</td>
+			<td>{{ int.protocol  }}</td>
+			<td>{{ int.as_provider  }}</td>
+			<td>{{ int.fp_provider }}</td>
+			<td>{{ int.description }}</td>
+			<td>{{ int.status }}</td>
+			<td>{{ int.iniciator }}</td>
+			<td>{{ int.int_technology }}</td>
+			<td>{{ int.consumer_status }}</td>
+			<td>{{ int.consumer_date }}</td>
+			<td>{{ int.consumer_as }}</td>
+			<td>{{ int.consumer_role }}</td>
+			<td>{{ int.consumer_process }}</td>
+			<td>{{ int.consumer_sla }}</td>
+			<td>{{ int.consumer_comment }}</td>
+			<td>{{ int.data_description }}</td>
+			<td>{{ int.data_encoding }}</td>
+			<td>{{ int.data_format }}</td>
+			<td>{{ int.data_confidential_level }}</td>
+			<td>{{ int.data_integrity_level }}</td>
+			<td>{{ int.schedule_initiation }}</td>
+			<td>{{ int.schedule_year }}</td>
+			<td>{{ int.schedule_month }}</td>
+			<td>{{ int.schedule_week }}</td>
+			<td>{{ int.schedule_day }}</td>
+			<td>{{ int.schedule_load_profile }}</td>
+			<td>{{ int.filesize_min }}</td>
+			<td>{{ int.filesize_max }}</td>
+			<td>{{ int.filesize_avg }}</td>
+			<td>{{ int.security_ssl_tls }}</td>
+			<td>{{ int.security_encription }}</td>
+			<td>{{ int.security_digital_signature }}</td>
+			<td>{{ int.architecture_standard_complience }}</td>
+			<td>{{ int.int_comment }}</td>
+            <td><a href="{% url 'arch_as:remove_int' int.id %}">Удалить</a><br/><a href="{% url 'arch_as:edit_int' int.id %}">Редактировать</a></td>
+			
+		</tr>
+        {% endfor %}
+    {% else %}
+        <tr><td colspan="35">Нет взаимодействий</tr>
+    {% endif %}
+	</tbody>
+</table>
+
+<p align="right">
+	<a href="{% url 'arch_as:add_int' as_id %}">Добавить новое взаимодействие</a>
+</p>
+
+<form method="get" action="{% url 'arch_as:upload_json' %}"><button type="submit" class="btn btn-primary">Загрузить JSON</button></form>
+
+
+{% endblock %}

@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Архитектура АС</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
+  </head>
+  <body>
+
+
+<div class="container">
+<h1>СУОР</h1>
+<small><i>Архитектура АС</i></small>
+<h5>Описание АС</h5>
+Целью внедрения СУОР в ОАО «Сбербанк России» является повышение эффективности работы и устойчивости бизнеса ОАО «Сбербанк России» за счет качественного управления операционными рисками, своевременного выявления потенциальных угроз, снижения потерь при реализации операционных рисков, оптимизации процессов ОАО «Сбербанк России» направленных на:
+
+повышение эффективности выявления рисков; превентивный подход к управлению – фокусировка на угрозах, а не на реализовавшихся потерях;
+снижение потенциальных угроз, в т.ч. обусловленных возможными финансовыми кризисами;
+выполнение количественной оценки операционных рисков на основе современных математических моделей;
+создание всех необходимых условий для перехода к использованию в ОАО «Сбербанк России» продвинутого подхода» (Advanced Measurement Approach);
+повышение культуры риск-менеджмента в ОАО «Сбербанк России»;
+поддержание и улучшение имиджа ОАО «Сбербанк России» для клиентов, партнеров и регулятора.
+<hr/>
+
+
+
+
+<h5>Взаимодействия АС</h5>
+<table id="table" 
+			 data-toggle="table"
+			 data-search="true"
+			 data-filter-control="true" 
+			 data-show-export="true"
+			 data-click-to-select="true"
+			 data-toolbar="#toolbar"
+       class="table-responsive">
+	<thead>
+		<tr>
+			<th rowspan="2" data-field="id" data-filter-control="input" data-sortable="true">#</th>
+			<th rowspan="2" data-field="сode" data-filter-control="input" data-sortable="true">Код</th>
+			<th rowspan="2" data-field="int_type" data-filter-control="select" data-sortable="true">Тип</th>
+			<th rowspan="2" data-field="protocol" data-filter-control="select" data-sortable="true">Протокол</th>
+			<th rowspan="2" data-field="as_provider" data-filter-control="select" data-sortable="true">АС Поставщик</th>
+			<th rowspan="2" data-field="fp_provider" data-filter-control="select" data-sortable="true">ФП поставщик</th>
+			<th rowspan="2" data-field="description" >Описание</th>
+			<th rowspan="2" data-field="status" data-filter-control="select" data-sortable="true">Статус</th>
+			<th rowspan="2" data-field="iniciator" data-filter-control="select" data-sortable="true">Инициатор</th>
+			<th rowspan="2" data-field="int_technology" data-filter-control="select" data-sortable="true">Технология взаимодействия</th>
+			<th rowspan="1" colspan="7">Потребитель</th>
+			<th rowspan="1" colspan="5">Передаваемые данные</th>
+			<th rowspan="1" colspan="6">Регламент выгрузки</th>
+			<th rowspan="1" colspan="3">Размер файла</th>
+			<th rowspan="1" colspan="3">Информационная безопасность</th>
+			<th rowspan="2" colspan="1" data-field="architecture_standard_complience">Соответсвтие стандартам архитектуры</th>
+			<th rowspan="2" colspan="1" data-field="int_comment">Комментарий</th>
+		</tr>
+		<tr>
+			<th data-field="consumer_status">Статус</th>
+			<th data-field="consumer_date">Срок</th>
+			<th data-field="consumer_as">АС</th>
+			<th data-field="consumer_role">Роль</th>
+			<th data-field="consumer_process">Процесс</th>
+			<th data-field="consumer_sla">SLA</th>
+			<th data-field="consumer_comment">Комментарий</th>
+			
+			<th data-field="data_description">Описание</th>
+			<th data-field="data_encoding">Кодировка</th>
+			<th data-field="data_format">Формат</th>
+			<th data-field="data_confidential_level">Категория конфиденциальности</th>
+			<th data-field="data_integrity_level">Категория целостности</th>
+			
+			<th data-field="schedule_initiation">Инициация</th>
+			<th data-field="schedule_year">Год</th>
+			<th data-field="schedule_month">Месяц</th>
+			<th data-field="schedule_week">Неделя</th>
+			<th data-field="schedule_day">День</th>
+			<th data-field="schedule_load_profile">Характер нагрузки</th>
+			
+			<th data-field="filesize_min">Мин</th>
+			<th data-field="filesize_max">Макс</th>
+			<th data-field="filesize_avg">Средний</th>
+			
+			<th data-field="security_ssl_tls">SSL/TLS</th>
+			<th data-field="security_encription">Шифрование</th>
+			<th data-field="security_digital_signature">ЭП</th>			
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>1</td>
+			<td>1274</td>
+			<td>Offline</td>
+			<td>SFTP</td>
+			<td>АСУ ТП Кредит</td>
+			<td>ФП Кредитн</td>
+			<td>Пакетная выгрузка кредитных историй5</td>
+			<td>Активное</td>
+			<td>АСУ ТП Кредит</td>
+			<td>SFTP</td>
+			<td>Active</td>
+			<td>12/20/2023</td>
+			<td>БКС</td>
+			<td>Потребитель</td>
+			<td>99.5</td>
+			<td>Активное вазимодействие выгрузки в БКС</td>
+			<td>-</td>
+			<td>-</td>
+			<td>-</td>
+			<td>-</td>
+			<td>-</td>
+			<td>-</td>
+			<td>-</td>
+			<td>-</td>
+			<td>-</td>
+			<td></td>
+			<td>-</td>
+			<td>-</td>
+			<td>-</td>
+			<td>-</td>
+			<td>-</td>
+			<td>-</td>
+			<td>-</td>
+			<td>-</td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+	
+  </body>
+</html>
