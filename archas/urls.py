@@ -9,7 +9,7 @@ from django.conf.urls.static import static
 
 app_name = 'archas'
 urlpatterns = [
-        path('', AutomatedSystemListView.as_view(), name='root'),
+        path('', AutomatedSystemListView.as_view(), name='index'),
         path('asl/', AutomatedSystemListView.as_view(), name='asl'),
         path('as/<slug:slug>', AutomatedSystemDetailView.as_view(), name='as_detail'),
         path('as/<slug:slug>/update', AutomatedSystemUpdate.as_view(), name='as_update'),

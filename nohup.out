@@ -6,3 +6,8 @@ Watching for file changes with StatReloader
 [01/Jul/2020 10:39:07] "GET /static/arch_as/css/styles.css HTTP/1.1" 200 187755
 [01/Jul/2020 10:39:07] "GET /static/arch_as/assets/demo/chart-bar-demo.js HTTP/1.1" 200 1112
 [01/Jul/2020 10:39:07] "GET /static/arch_as/assets/demo/datatables-demo.js HTTP/1.1" 200 268
+Watching for file changes with StatReloader
+Not Found: /asl
+[03/Jul/2020 03:14:00] "GET /asl HTTP/1.1" 404 3619
+Not Found: /asl/
+[03/Jul/2020 03:14:09] "GET /asl/?catalog=%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B%20%D0%A0%D0%91 HTTP/1.1" 404 3688
