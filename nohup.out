@@ -1,0 +1,8 @@
+Watching for file changes with StatReloader
+[01/Jul/2020 10:39:07] "GET / HTTP/1.1" 200 10959
+[01/Jul/2020 10:39:07] "GET /static/polls/style.css HTTP/1.1" 404 1675
+[01/Jul/2020 10:39:07] "GET /static/arch_as/js/scripts.js HTTP/1.1" 200 803
+[01/Jul/2020 10:39:07] "GET /static/arch_as/assets/demo/chart-area-demo.js HTTP/1.1" 200 1530
+[01/Jul/2020 10:39:07] "GET /static/arch_as/css/styles.css HTTP/1.1" 200 187755
+[01/Jul/2020 10:39:07] "GET /static/arch_as/assets/demo/chart-bar-demo.js HTTP/1.1" 200 1112
+[01/Jul/2020 10:39:07] "GET /static/arch_as/assets/demo/datatables-demo.js HTTP/1.1" 200 268

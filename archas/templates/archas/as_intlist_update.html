@@ -1,0 +1,134 @@
+{% extends "archas/archas_base.html" %}
+
+{% block content %}					
+
+                        <h1 class="mt-4">Архитектура АС - {{ automated_system.name }}</h1>
+						
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="/asl">Архитектура Проектов</a></li>
+                            <li class="breadcrumb-item"><a href="/asl">Проекты КБ</a></li>
+                            <li class="breadcrumb-item active">{{ automated_system.name }}</li>
+                        </ol>
+						
+						<div class="card mb-4">
+                            <div class="card-header">
+                                <!-- <i class="fas fa-table mr-1"></i> -->
+                                Интеграционные взаимодействия АС
+                            </div>
+                            <div class="card-body">
+                                <form method="get" action="{% url 'archas:interaction_create' automated_system.id%}"><button type="submit" class="btn btn-dark">Добавить новое взаимодействие</button></form>
+                                <div class="table-responsive">
+									<table id="tableInt" 
+												 data-toggle="table"
+												 data-search="true"
+												 data-filter-control="true" 
+												 data-show-export="true"
+												 data-click-to-select="true"
+												 data-toolbar="#toolbar"
+										   class="table table-bordered" width="100%" cellspacing="0">
+										<thead>
+											<tr>
+												<th rowspan="2" colspan="1" data-field="int_comment">Действия</th>
+												<th rowspan="2" data-field="id" data-filter-control="input" data-sortable="true">#</th>
+												<th rowspan="2" data-field="сode" data-filter-control="input" data-sortable="true">Код</th>
+												<th rowspan="2" data-field="int_type" data-filter-control="select" data-sortable="true">Тип</th>
+												<th rowspan="2" data-field="protocol" data-filter-control="select" data-sortable="true">Протокол</th>
+												<th rowspan="2" data-field="as_provider" data-filter-control="select" data-sortable="true">АС Поставщик</th>
+												<th rowspan="2" data-field="fp_provider" data-filter-control="select" data-sortable="true">ФП поставщик</th>
+												<th rowspan="2" data-field="description" >Описание</th>
+												<th rowspan="2" data-field="status" data-filter-control="select" data-sortable="true">Статус</th>
+												<th rowspan="2" data-field="iniciator" data-filter-control="select" data-sortable="true">Инициатор</th>
+												<th rowspan="2" data-field="int_technology" data-filter-control="select" data-sortable="true">Технология взаимодействия</th>
+												<th rowspan="1" colspan="7">Потребитель</th>
+												<th rowspan="1" colspan="5">Передаваемые данные</th>
+												<th rowspan="1" colspan="6">Регламент выгрузки</th>
+												<th rowspan="1" colspan="3">Размер файла</th>
+												<th rowspan="1" colspan="3">Информационная безопасность</th>
+												<th rowspan="2" colspan="1" data-field="architecture_standard_complience">Соответсвтие стандартам архитектуры</th>
+												<th rowspan="2" colspan="1" data-field="int_comment">Комментарий</th>
+											</tr>
+											<tr>
+												<th data-field="consumer_status">Статус</th>
+												<th data-field="consumer_date">Срок</th>
+												<th data-field="consumer_as">АС</th>
+												<th data-field="consumer_role">Роль</th>
+												<th data-field="consumer_process">Процесс</th>
+												<th data-field="consumer_sla">SLA</th>
+												<th data-field="consumer_comment">Комментарий</th>
+												
+												<th data-field="data_description">Описание</th>
+												<th data-field="data_encoding">Кодировка</th>
+												<th data-field="data_format">Формат</th>
+												<th data-field="data_confidential_level">Категория конфиденциальности</th>
+												<th data-field="data_integrity_level">Категория целостности</th>
+												
+												<th data-field="schedule_initiation">Инициация</th>
+												<th data-field="schedule_year">Год</th>
+												<th data-field="schedule_month">Месяц</th>
+												<th data-field="schedule_week">Неделя</th>
+												<th data-field="schedule_day">День</th>
+												<th data-field="schedule_load_profile">Характер нагрузки</th>
+												
+												<th data-field="filesize_min">Мин</th>
+												<th data-field="filesize_max">Макс</th>
+												<th data-field="filesize_avg">Средний</th>
+												
+												<th data-field="security_ssl_tls">SSL/TLS</th>
+												<th data-field="security_encription">Шифрование</th>
+												<th data-field="security_digital_signature">ЭП</th>		
+											</tr>
+										</thead>
+										<tbody>
+                                            {% if interactions_list %}
+                                            {% for interaction in interactions_list %}
+											<tr>
+                                                <td>
+                                                    <a href="{% url 'archas:interaction_update' interaction.id %}">Редактировать</a><br/>
+                                                    <a href="{% url 'archas:interaction_remove' interaction.id %}">Удалить</a>
+                                                </td>
+                                                <td>{{ interaction.id  }}</td>
+                                                <td>{{ interaction.code  }}</td>
+                                                <td>{{ interaction.int_type }}</td>
+                                                <td>{{ interaction.protocol  }}</td>
+                                                <td>{{ interaction.as_provider  }}</td>
+                                                <td>{{ interaction.fp_provider }}</td>
+                                                <td>{{ interaction.description }}</td>
+                                                <td>{{ interaction.status }}</td>
+                                                <td>{{ interaction.iniciator }}</td>
+                                                <td>{{ interaction.int_technology }}</td>
+                                                <td>{{ interaction.consumer_status }}</td>
+                                                <td>{{ interaction.consumer_date }}</td>
+                                                <td>{{ interaction.consumer_as }}</td>
+                                                <td>{{ interaction.consumer_role }}</td>
+                                                <td>{{ interaction.consumer_process }}</td>
+                                                <td>{{ interaction.consumer_sla }}</td>
+                                                <td>{{ interaction.consumer_comment }}</td>
+                                                <td>{{ interaction.data_description }}</td>
+                                                <td>{{ interaction.data_encoding }}</td>
+                                                <td>{{ interaction.data_format }}</td>
+                                                <td>{{ interaction.data_confidential_level }}</td>
+                                                <td>{{ interaction.data_integrity_level }}</td>
+                                                <td>{{ interaction.schedule_initiation }}</td>
+                                                <td>{{ interaction.schedule_year }}</td>
+                                                <td>{{ interaction.schedule_month }}</td>
+                                                <td>{{ interaction.schedule_week }}</td>
+                                                <td>{{ interaction.schedule_day }}</td>
+                                                <td>{{ interaction.schedule_load_profile }}</td>
+                                                <td>{{ interaction.filesize_min }}</td>
+                                                <td>{{ interaction.filesize_max }}</td>
+                                                <td>{{ interaction.filesize_avg }}</td>
+                                                <td>{{ interaction.security_ssl_tls }}</td>
+                                                <td>{{ interaction.security_encription }}</td>
+                                                <td>{{ interaction.security_digital_signature }}</td>
+                                                <td>{{ interaction.architecture_standard_complience }}</td>
+                                                <td>{{ interaction.int_comment }}</td>
+											</tr>
+                                            {% endfor %}
+                                            {% endif %}
+										</tbody>
+									</table>
+                                    <form method="get" action="{% url 'archas:as_detail' automated_system.id%}"><button type="submit" class="btn btn-dark">Сохранить и выйти</button></form>
+								</div>
+							</div>
+						</div>
+{% endblock content%}

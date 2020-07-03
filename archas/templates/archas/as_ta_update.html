@@ -1,0 +1,36 @@
+{% extends "archas/archas_base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}					
+
+                        <h1 class="mt-4">Редактирвоание АС - {{ automated_system.name }}</h1>
+
+						<div class="card mb-4">
+                            <div class="card-header">
+                                Целевая архитектура АС
+                            </div>
+                            <div class="card-body">
+
+                        <form method="post" novalidate>
+                        {% csrf_token %}
+                        <p>
+                        <label for="id_target_architecture_diagram" class="">
+                             Диаграмма целевой архитектуры
+                        </label>
+                        <input type="file" name="target_architecture_diagram" accept="image/*" class="clearablefileinput form-control-file" id="id_target_architecture_diagram">
+                        </p>
+                        <p><button type="submit" class="btn btn btn-dark">Сохранить</button></p>
+                        </form>
+
+                            {% if automated_system.target_architecture_diagram %}
+                                <img src="{{ automated_system.target_architecture_diagram.url }}" class="img-fluid"/>
+                            {% else %}
+                                <p><i><small>Диаграмма целевой архитектуры не загружена</small></i></p>
+                            {% endif %}	
+
+							</div>
+						</div>	
+
+						
+{% endblock content%}

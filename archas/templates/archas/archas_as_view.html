@@ -1,0 +1,247 @@
+{% extends "archas/archas_base.html" %}
+
+{% block content %}					
+
+                        <h1 class="mt-4">Архитектура АС - {{ automated_system.name }}</h1>
+						
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="#">Архитектура Проектов</a></li>
+                            <li class="breadcrumb-item"><a href="/asl">Проекты КБ</a></li>
+                            <li class="breadcrumb-item active">{{ automated_system.name }}</li>
+                        </ol>
+					
+						<div class="card mb-4">
+                            <div class="card-header">
+                                <!-- <i class="fas fa-table mr-1"></i> -->
+                                Описание Автоматизированной Системы
+								<div class="float-right"><a href="{% url 'archas:as_update' automated_system.id %}">Редактировать</a></div>
+                            </div>
+                            <div class="card-body">
+								<div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
+										<tbody>
+                                            <tr>
+												<th>Код АС</th>
+                                                <td>{{ automated_system.code }}</td>
+											</tr>
+                                            <tr>
+												<th>Имя АС</th>
+                                                <td>{{ automated_system.name }}</td>
+											</tr>
+                                            <tr>
+												<th>Владелец АС</th>
+                                                <td>{{ automated_system.owner }}</td>
+											</tr>
+                                            <tr>
+												<th>Статус</th>
+                                                <td>{{ automated_system.status }}</td>
+											</tr>
+                                            <tr>
+												<th>Cloud Ready/Native</th>
+                                                <td>{{ automated_system.cloud_ready }}</td>
+											</tr>
+                                            <tr>
+												<th>Platform Ready</th>
+                                                <td>{{ automated_system.platform_ready }}</td>
+											</tr>
+                                            <tr>
+												<th>Владелец АС - Блок</th>
+                                                <td>{{ automated_system.owner_block }}</td>
+											</tr>
+                                            <tr>
+												<th>Владелец АС - Трайб</th>
+                                                <td>{{ automated_system.owner_tribe }}</td>
+											</tr>
+                                            <tr>
+												<th>Полное имя АС</th>
+                                                <td>{{ automated_system.full_name }}</td>
+											</tr>
+                                            <tr>
+												<th>Псевдоним АС</th>
+                                                <td>{{ automated_system.nickname }}</td>
+											</tr>
+                                            <tr>
+												<th>Краткое описание</th>
+                                                <td>{{ automated_system.short_description }}</td>
+											</tr>
+                                            <tr>
+												<th>ID в RSA</th>
+                                                <td>{{ automated_system.rsa_id }}</td>
+											</tr>
+                                            <tr>
+												<th>ID в Service Desk</th>
+                                                <td>{{ automated_system.service_desk_id }}</td>
+											</tr>
+                                            <tr>
+												<th>GUID</th>
+                                                <td>{{ automated_system.guid }}</td>
+											</tr>
+                                            <tr>
+												<th>Уровень централизации</th>
+                                                <td>{{ automated_system.centralization_level }}</td>
+											</tr>
+                                            <tr>
+												<th>Критичность системы</th>
+                                                <td>{{ automated_system.system_criticality }}</td>
+											</tr>
+                                            <tr>
+												<th>Целевой статус</th>
+                                                <td>{{ automated_system.target_status }}</td>
+											</tr>
+                                            <tr>
+												<th>Готовность целевого решения</th>
+                                                <td>{{ automated_system.target_readiness }}</td>
+											</tr>
+                                            <tr>
+												<th>Лидер АС</th>
+                                                <td>{{ automated_system.as_lider }}</td>
+											</tr>
+                                            <tr>
+												<th>Архитектор АС</th>
+                                                <td>{{ automated_system.as_architect }}</td>
+											</tr>
+                                            <tr>
+												<th>Курирующий архитектор</th>
+                                                <td>{{ automated_system.architect_in_charge }}</td>
+											</tr>
+                                            <tr>
+												<th>Редакторы</th>
+                                                <td>{{ automated_system.editors }}</td>
+											</tr>
+                                        </tbody>
+                                    </table>
+								</div>
+							</div>
+						</div>
+						
+						<div class="card mb-4">
+                            <div class="card-header">
+                                <!-- <i class="fas fa-table mr-1"></i> -->
+                                Целевая архитектура АС
+								<div class="float-right"><a href="{% url 'archas:as_ta_update' automated_system.id %}">Редактировать</a></div>
+                            </div>
+                            <div class="card-body">
+                            {% if automated_system.target_architecture_diagram %}
+                                <img src="{{ automated_system.target_architecture_diagram.url }}" class="img-fluid"/>
+                            {% else %}
+                                <p><i><small>Диаграмма целевой архитектуры не загружена</small></i></p>
+                            {% endif %}								
+							</div>
+						</div>
+						
+						<div class="card mb-4">
+                            <div class="card-header">
+                                <!-- <i class="fas fa-table mr-1"></i> -->
+                                Интеграционные взаимодействия АС
+								<div class="float-right"><a href="{% url 'archas:int_list_update' automated_system.id %}">Редактировать</a></div>
+                            </div>
+                            <div class="card-body">
+								<div class="table-responsive">
+									<table id="tableInt" 
+												 data-toggle="table"
+												 data-search="true"
+												 data-filter-control="true" 
+												 data-show-export="true"
+												 data-click-to-select="true"
+												 data-toolbar="#toolbar"
+										   class="table table-bordered" width="100%" cellspacing="0">
+										<thead>
+											<tr>
+												<th rowspan="2" data-field="id" data-filter-control="input" data-sortable="true">#</th>
+												<th rowspan="2" data-field="сode" data-filter-control="input" data-sortable="true">Код</th>
+												<th rowspan="2" data-field="int_type" data-filter-control="select" data-sortable="true">Тип</th>
+												<th rowspan="2" data-field="protocol" data-filter-control="select" data-sortable="true">Протокол</th>
+												<th rowspan="2" data-field="as_provider" data-filter-control="select" data-sortable="true">АС Поставщик</th>
+												<th rowspan="2" data-field="fp_provider" data-filter-control="select" data-sortable="true">ФП поставщик</th>
+												<th rowspan="2" data-field="description" >Описание</th>
+												<th rowspan="2" data-field="status" data-filter-control="select" data-sortable="true">Статус</th>
+												<th rowspan="2" data-field="iniciator" data-filter-control="select" data-sortable="true">Инициатор</th>
+												<th rowspan="2" data-field="int_technology" data-filter-control="select" data-sortable="true">Технология взаимодействия</th>
+												<th rowspan="1" colspan="7">Потребитель</th>
+												<th rowspan="1" colspan="5">Передаваемые данные</th>
+												<th rowspan="1" colspan="6">Регламент выгрузки</th>
+												<th rowspan="1" colspan="3">Размер файла</th>
+												<th rowspan="1" colspan="3">Информационная безопасность</th>
+												<th rowspan="2" colspan="1" data-field="architecture_standard_complience">Соответсвтие стандартам архитектуры</th>
+												<th rowspan="2" colspan="1" data-field="int_comment">Комментарий</th>
+											</tr>
+											<tr>
+												<th data-field="consumer_status">Статус</th>
+												<th data-field="consumer_date">Срок</th>
+												<th data-field="consumer_as">АС</th>
+												<th data-field="consumer_role">Роль</th>
+												<th data-field="consumer_process">Процесс</th>
+												<th data-field="consumer_sla">SLA</th>
+												<th data-field="consumer_comment">Комментарий</th>
+												
+												<th data-field="data_description">Описание</th>
+												<th data-field="data_encoding">Кодировка</th>
+												<th data-field="data_format">Формат</th>
+												<th data-field="data_confidential_level">Категория конфиденциальности</th>
+												<th data-field="data_integrity_level">Категория целостности</th>
+												
+												<th data-field="schedule_initiation">Инициация</th>
+												<th data-field="schedule_year">Год</th>
+												<th data-field="schedule_month">Месяц</th>
+												<th data-field="schedule_week">Неделя</th>
+												<th data-field="schedule_day">День</th>
+												<th data-field="schedule_load_profile">Характер нагрузки</th>
+												
+												<th data-field="filesize_min">Мин</th>
+												<th data-field="filesize_max">Макс</th>
+												<th data-field="filesize_avg">Средний</th>
+												
+												<th data-field="security_ssl_tls">SSL/TLS</th>
+												<th data-field="security_encription">Шифрование</th>
+												<th data-field="security_digital_signature">ЭП</th>		
+											</tr>
+										</thead>
+										<tbody>
+                                            {% if interactions_list %}
+                                            {% for interaction in interactions_list %}
+											<tr>
+                                                <td>{{ interaction.id  }}</td>
+                                                <td>{{ interaction.code  }}</td>
+                                                <td>{{ interaction.int_type }}</td>
+                                                <td>{{ interaction.protocol  }}</td>
+                                                <td>{{ interaction.as_provider  }}</td>
+                                                <td>{{ interaction.fp_provider }}</td>
+                                                <td>{{ interaction.description }}</td>
+                                                <td>{{ interaction.status }}</td>
+                                                <td>{{ interaction.iniciator }}</td>
+                                                <td>{{ interaction.int_technology }}</td>
+                                                <td>{{ interaction.consumer_status }}</td>
+                                                <td>{{ interaction.consumer_date }}</td>
+                                                <td>{{ interaction.consumer_as }}</td>
+                                                <td>{{ interaction.consumer_role }}</td>
+                                                <td>{{ interaction.consumer_process }}</td>
+                                                <td>{{ interaction.consumer_sla }}</td>
+                                                <td>{{ interaction.consumer_comment }}</td>
+                                                <td>{{ interaction.data_description }}</td>
+                                                <td>{{ interaction.data_encoding }}</td>
+                                                <td>{{ interaction.data_format }}</td>
+                                                <td>{{ interaction.data_confidential_level }}</td>
+                                                <td>{{ interaction.data_integrity_level }}</td>
+                                                <td>{{ interaction.schedule_initiation }}</td>
+                                                <td>{{ interaction.schedule_year }}</td>
+                                                <td>{{ interaction.schedule_month }}</td>
+                                                <td>{{ interaction.schedule_week }}</td>
+                                                <td>{{ interaction.schedule_day }}</td>
+                                                <td>{{ interaction.schedule_load_profile }}</td>
+                                                <td>{{ interaction.filesize_min }}</td>
+                                                <td>{{ interaction.filesize_max }}</td>
+                                                <td>{{ interaction.filesize_avg }}</td>
+                                                <td>{{ interaction.security_ssl_tls }}</td>
+                                                <td>{{ interaction.security_encription }}</td>
+                                                <td>{{ interaction.security_digital_signature }}</td>
+                                                <td>{{ interaction.architecture_standard_complience }}</td>
+                                                <td>{{ interaction.int_comment }}</td>
+											</tr>
+                                            {% endfor %}
+                                            {% endif %}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+{% endblock content%}
