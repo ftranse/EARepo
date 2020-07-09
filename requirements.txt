@@ -1,2 +1,5 @@
+django==3.0.x
+django-debug-toolbar==x.x.x
 django-crispy-forms==1.9.1
 Pillow==7.2.0
+Pillow==7.1.2/7.2.0
