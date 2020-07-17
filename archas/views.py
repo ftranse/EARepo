@@ -13,6 +13,10 @@ from django.views.generic import TemplateView
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import UpdateView, CreateView
 
+import requests
+import json, xmljson
+from lxml.etree import fromstring, tostring
+
 
 class AutomatedSystemListView(ListView):
     model = AutomatedSystem
@@ -221,6 +225,25 @@ def as_view(request, *args):
 def category_view(request, *args):
     return render(request, 'archas/archas_category_view.html')
 
+def confluence(request, *args):
+
+    pageId = request.GET.get('pageId', '753677')
+
+    r = requests.get('http://130.193.36.149:8090/rest/api/content/'+str(pageId)+'?expand=body.storage', auth=('admin', 'adminadmin'))
+    page_title = r.json()['title']
+    page_body_xml = r.json()['body']['storage']['value']
+
+    xml = fromstring('<page>'+page_body_xml+'</page>')
+    page_body_parsed_json = json.dumps(xmljson.parker.data(xml))
+
+    page_body_minidom_json = json.loads(page_body_parsed_json)
+    page_body_pretty_json = json.dumps(page_body_minidom_json, indent=4)
+
+    json_pretty = '{"json":"good"}'
+    context = {'page_title': page_title, 'page_body_json': page_body_pretty_json}
+
+    return render (request, 'archas/confluence.html', context)
+
 class AboutView(TemplateView):
     template_name = "archas/archas_category_view.html"
 
@@ -235,3 +258,4 @@ class BookListView(ListView):
         # context['book_list'] = Book.objects.all()
         context['as_id'] = 1
         return context
+

@@ -18,6 +18,7 @@ urlpatterns = [
         path('int/<slug:interaction_id>/update', InteractionUpdate.as_view(), name='interaction_update'),
         path('int/<int:automated_system_id>/create', InteractionCreate.as_view(), name='interaction_create'),
         path('int/<slug:interaction_id>/remove', views.interaction_remove, name='interaction_remove'),
+        path('confluence/', views.confluence, name='confluence'),
 
 
 

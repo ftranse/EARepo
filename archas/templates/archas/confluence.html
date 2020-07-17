@@ -1,0 +1,35 @@
+{% extends "archas/archas_base.html" %}
+
+{% block content%}
+
+                        <h1 class="mt-4">Проекты КБ</h1>
+						
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="#">Архитектура Проектов</a></li>
+                            <li class="breadcrumb-item"><a href="#">Проекты КБ</a></li>
+                            <li class="breadcrumb-item active">Confluence Page to JSON</li>
+                        </ol>
+						
+						<div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table mr-1"></i>
+                                Confluence Page to JSON
+                            </div>
+                            <div class="card-body">
+                                <p>
+                                    <form method="GET">Confluence Page Id  <input type="text" id="pageId"/>  <input type="submit"> </form>
+                                </p>
+                                <h1>{{ page_title }}</h1>
+
+                                <p>
+
+                                <code>
+                                <pre>{{ page_body_json }}</pre>
+                                </code>
+                                </p>
+
+                                
+                            </div>
+                        </div>
+                        
+{% endblock content%}
