@@ -1,8 +1,10 @@
+# Configure GIT
 git config --global credential.helper store
 
-sudo apt-get remove docker docker-engine docker.io containerd runc
-
 sudo apt-get update
+
+# Install docker
+sudo apt-get remove docker docker-engine docker.io containerd runc
 
 sudo apt-get install -y \
     apt-transport-https \
@@ -22,3 +24,9 @@ sudo add-apt-repository \
 
 sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+
+# Install pip
+sudo apt install -y python3-pip
+
+# Install requirements
+python3 -m pip install -r /vagrant/requirements.txt

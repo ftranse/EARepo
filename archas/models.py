@@ -1,8 +1,20 @@
 from django.db import models
 
+class ArchitectureRealm(models.Model):
+    name = models.CharField('Область Определения Архитектуры', max_length=50)
 
+class ArchitectureCategory(models.Model):
+    realm = models.ForeignKey(ArchitectureRealm, on_delete=models.CASCADE)
+    name = models.CharField('Категория АС', max_length=50)
+
+class ArchitectureSubCategory(models.Model):
+    category = models.ForeignKey(ArchitectureCategory, on_delete=models.CASCADE)
+    name = models.CharField('Подкатегория АС', max_length=50)
 
 class AutomatedSystem(models.Model):
+
+    subcategory = models.ForeignKey(ArchitectureSubCategory, on_delete=models.CASCADE)
+
     code = models.CharField('Код АС', max_length=50)
     name = models.CharField('Автоматизированная Система', max_length=100)
     owner = models.CharField('Владелец', max_length=50, blank=True)
