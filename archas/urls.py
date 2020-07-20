@@ -9,7 +9,12 @@ from django.conf.urls.static import static
 
 app_name = 'archas'
 urlpatterns = [
-        path('', AutomatedSystemListView.as_view(), name='index'),
+
+        # / - список первой из категорий - редирект на /category/
+        # /category/<id> - список А
+        # /subcategory/<id> - список АС в подкатегории
+
+        # path('', AutomatedSystemListView.as_view(), name='index'),
         path('asl/', AutomatedSystemListView.as_view(), name='asl'),
         path('as/<slug:slug>', AutomatedSystemDetailView.as_view(), name='as_detail'),
         path('as/<slug:slug>/update', AutomatedSystemUpdate.as_view(), name='as_update'),
@@ -20,6 +25,10 @@ urlpatterns = [
         path('int/<slug:interaction_id>/remove', views.interaction_remove, name='interaction_remove'),
         path('confluence/', views.confluence, name='confluence'),
 
+        path('',views.overview_view, name='overview_view'),
+        path('realm/<int:realm_id>',views.realm_view, name='realm_view'),
+        path('category/<int:category_id>',views.category_view, name='category_view'),
+        path('subcategory/<int:subcategory_id>',subcategory_view, name='subcategory_view'),
 
 
         path('as/<int:as_id>/add_int', views.add_int, name="add_int"),
@@ -28,7 +37,7 @@ urlpatterns = [
         path('upload_json/', views.upload_json, name='upload_json'),
         path('archas_base/', views.arachas_base, name='arachas_base'),
         path('archas_as_view/', views.as_view, name='as_view'),
-        path('archas_category_view/', views.category_view, name='category_view'),
+        path('archas_category_view/', views.category_view_old, name='category_view_old'),
         path('test_class_view/', AboutView.as_view(template_name="archas/archas_as_view.html")),
         path('test_class_view/', AboutView.as_view(template_name="archas/archas_as_view.html")),
         path('test_listclass_view/', BookListView.as_view()),

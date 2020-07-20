@@ -12,10 +12,10 @@
                             </div>
                             <div class="card-body">
 
-                        <form method="post" novalidate>
+                        <form action="" method="post" enctype="multipart/form-data" novalidate>
                         {% csrf_token %}
-                        <p>
-                        <label for="id_target_architecture_diagram" class="">
+                        {% comment %} {{ form|crispy }} {% endcomment %}
+                        <p> <label for="id_target_architecture_diagram" class="">
                              Диаграмма целевой архитектуры
                         </label>
                         <input type="file" name="target_architecture_diagram" accept="image/*" class="clearablefileinput form-control-file" id="id_target_architecture_diagram">

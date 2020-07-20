@@ -14,7 +14,7 @@
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Архитектура АС</a>
+            <a class="navbar-brand" href="/">Архитектура АС</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search -->
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -48,7 +48,35 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-						
+                                        
+                            {% if realms %}
+                                {% for realm_iter in realms %}
+                                    <div class="sb-sidenav-menu-heading">{{ realm_iter.name }}</div>
+
+                                        {% for category_iter in realm_iter.architecturecategory_set.all %}
+
+                                            <a class="nav-link collapsed" href="{% url 'archas:category_view' category_iter.id %}" data-toggle="collapse" data-target="#collapseCategory{{category_iter.id}}" aria-expanded="false" aria-controls="collapseCategory{{category_iter.id}}">
+                                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                                {{ category_iter.name }}
+                                                {% if category_iter.architecturesubcategory_set.all.count > 0 %}
+                                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                                {% endif %}
+                                            </a>
+                                            {% if category_iter.architecturesubcategory_set.all.count > 0 %}
+                                            <div class="collapse" id="collapseCategory{{category_iter.id}}" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                                <nav class="sb-sidenav-menu-nested nav">
+                                                    {% for subcat in category_iter.architecturesubcategory_set.all %}
+                                                        <a class="nav-link" href="{% url 'archas:subcategory_view' subcat.id %}">{{ subcat.name }}</a>
+                                                    {% endfor %}
+                                                </nav>
+                                            </div>
+                                            {% endif %}
+
+                                        {% endfor %}
+
+                                {% endfor %}
+                            {% else %}
+                
                             <div class="sb-sidenav-menu-heading">Архитектура проектов</div>
 							
                             <a class="nav-link" href="/asl/?catalog=Проекты КБ">
@@ -64,12 +92,12 @@
 							
                             <div class="sb-sidenav-menu-heading">Архитектура трайбов</div>
 							
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProjects" aria-expanded="false" aria-controls="collapseProjects">
+                            <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseProjects" aria-expanded="true" aria-controls="collapseProjects">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Блок Риски
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="collapse" id="collapseProjects" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                            <div class="collapse show" id="collapseProjects" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="/asl">БР-ИРМ</a>
                                     <a class="nav-link" href="/asl">БР-РКБ</a>
@@ -88,6 +116,10 @@
                                     <a class="nav-link" href="/asl">БТ-SberInfra</a>
                                 </nav>
                             </div>
+                
+                            {% endif %}
+
+
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">

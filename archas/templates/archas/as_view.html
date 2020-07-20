@@ -5,8 +5,9 @@
                         <h1 class="mt-4">Архитектура АС - {{ automated_system.name }}</h1>
 						
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="#">Архитектура Проектов</a></li>
-                            <li class="breadcrumb-item"><a href="/asl">Проекты КБ</a></li>
+                            <li class="breadcrumb-item"><a href="#">{{ automated_system.subcategory.category.realm }}</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'archas:category_view' automated_system.subcategory.category.id %}">{{ automated_system.subcategory.category }}</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'archas:subcategory_view' automated_system.subcategory.id %}">{{ automated_system.subcategory }}</a></li>
                             <li class="breadcrumb-item active">{{ automated_system.name }}</li>
                         </ol>
 					
@@ -197,8 +198,8 @@
 											</tr>
 										</thead>
 										<tbody>
-                                            {% if interactions_list %}
-                                            {% for interaction in interactions_list %}
+                                            {% if automated_system.interaction_set.all %}
+                                            {% for interaction in automated_system.interaction_set.all %}
 											<tr>
                                                 <td>{{ interaction.id  }}</td>
                                                 <td>{{ interaction.code  }}</td>

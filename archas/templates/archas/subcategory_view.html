@@ -1,0 +1,61 @@
+{% extends "archas/archas_base.html" %}
+
+{% block content%}
+
+                        <h1 class="mt-4">{{ subcategory.name }}</h1>
+						
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="#">{{ subcategory.category.realm.name }}</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'archas:category_view' subcategory.category.id %}">{{ subcategory.category }}</a></li>
+                            <li class="breadcrumb-item active">{{ subcategory.name }}</li>
+                        </ol>
+						
+						<div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table mr-1"></i>
+                                Список АС - {{ subcategory.name }}
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Код АС</th>
+                                                <th>Имя АС</th>
+                                                <th>Владелец АС</th>
+                                                <th>Статус</th>
+                                                <th>Cloud Ready/Native</th>
+                                                <th>Platform Ready</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Код АС</th>
+                                                <th>Имя АС</th>
+                                                <th>Владелец АС</th>
+                                                <th>Статус</th>
+                                                <th>Cloud Ready/Native</th>
+                                                <th>Platform Ready</th>
+                                            </tr>
+                                        </tfoot>
+										<tbody>
+                                        
+                                        {% if subcategory.automatedsystem_set.all %}
+                                            {% for automated_system in subcategory.automatedsystem_set.all %}
+                                            <tr>
+                                                <td><a href="{% url 'archas:as_detail' automated_system.id %}">{{ automated_system.code }}</a></td>
+                                                <td><a href="{% url 'archas:as_detail' automated_system.id %}">{{ automated_system.name }}</a></td>
+                                                <td>{{ automated_system.owner }}</td>
+                                                <td>{{ automated_system.status }}</td>
+                                                <td>{{ automated_system.cloud_ready }}</td>
+                                                <td>{{ automated_system.platform_ready }}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+{% endblock content%}

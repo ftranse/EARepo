@@ -1,0 +1,60 @@
+{% extends "archas/archas_base.html" %}
+
+{% block content%}
+
+                        <h1 class="mt-4">{{ realm.name }}</h1>
+						
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">{{ realm.name }}</li>
+                        </ol>
+						
+						<div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table mr-1"></i>
+                                <b>Перечень артефактов области "{{ realm.name }}"</b>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Код АС</th>
+                                                <th>Имя АС</th>
+                                                <th>Владелец АС</th>
+                                                <th>Статус</th>
+                                                <th>Cloud Ready/Native</th>
+                                                <th>Platform Ready</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Код АС</th>
+                                                <th>Имя АС</th>
+                                                <th>Владелец АС</th>
+                                                <th>Статус</th>
+                                                <th>Cloud Ready/Native</th>
+                                                <th>Platform Ready</th>
+                                            </tr>
+                                        </tfoot>
+										<tbody>
+                                    {% for category in realm.architecturecategory_set.all %}
+                                        {% for subcat in category.architecturesubcategory_set.all %}
+                                            {% for automated_system in subcat.automatedsystem_set.all %}
+                                            <tr>
+                                                <td><a href="{% url 'archas:as_detail' automated_system.id %}">{{ automated_system.code }}</a></td>
+                                                <td><a href="{% url 'archas:as_detail' automated_system.id %}">{{ automated_system.name }}</a></td>
+                                                <td>{{ automated_system.owner }}</td>
+                                                <td>{{ automated_system.status }}</td>
+                                                <td>{{ automated_system.cloud_ready }}</td>
+                                                <td>{{ automated_system.platform_ready }}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+{% endblock content%}

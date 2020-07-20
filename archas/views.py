@@ -17,20 +17,68 @@ import requests
 import json, xmljson
 from lxml.etree import fromstring, tostring
 
+def overview_view(request):
+    realms = ArchitectureRealm.objects.all()
+    context = {
+                'realms': realms
+                }
+    return render (request, 'archas/overview_view.html', context)
+
+def realm_view(request, realm_id):
+    realms = ArchitectureRealm.objects.all()
+    realm = get_object_or_404(ArchitectureRealm, id=realm_id)
+    context = {
+                'realms': realms,
+                'realm': realm,
+                }
+    return render (request, 'archas/realm_view.html', context)
+
+def category_view(request, category_id):
+    category = get_object_or_404(ArchitectureCategory, id=category_id)
+    realm = category.realm
+    # realm = get_object_or_404(ArchitectureRealm, id=category.realm_id)
+    # subcategories_list = ArchitectureSubCategory.objects.filter(category_id=category_id)
+    # automated_system_list = []
+    # for subcat in subcategories_list:
+        # automated_system_list.extend(list(AutomatedSystem.objects.filter(subcategory=subcat)))
+    realms = ArchitectureRealm.objects.all()
+    context = { 'category': category,
+                'realm' : realm ,
+                # 'subcategories_list': subcategories_list,
+                # 'automated_system_list': automated_system_list,
+                'realms': realms
+                } 
+    return render (request, 'archas/category_view.html', context)
+
+def subcategory_view(request, subcategory_id):
+    realms = ArchitectureRealm.objects.all()
+    subcategory = get_object_or_404(ArchitectureSubCategory, id=subcategory_id)
+    context = { 
+                'realms': realms,
+                'subcategory': subcategory,
+                } 
+    return render (request, 'archas/subcategory_view.html', context)
+    
+class AutomatedSystemDetailView(DetailView):
+    model = AutomatedSystem
+    slug_field = 'id'
+    template_name = 'archas/as_view.html'
+    context_object_name = 'automated_system'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['realms'] = ArchitectureRealm.objects.all()
+        return context
+
+
+
 
 class AutomatedSystemListView(ListView):
     model = AutomatedSystem
     template_name = 'archas/archas_category_view.html'
     context_object_name = 'automated_system_list'
-    
-class AutomatedSystemDetailView(DetailView):
-    model = AutomatedSystem
-    slug_field = 'id'
-    template_name = 'archas/archas_as_view.html'
-    context_object_name = 'automated_system'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['interactions_list'] = Interaction.objects.filter(automated_system=self.object)
+        context['realms'] = ArchitectureRealm.objects.all()
         return context
 
 class AutomatedSystemUpdate(UpdateView):
@@ -42,6 +90,10 @@ class AutomatedSystemUpdate(UpdateView):
     'as_architect','architect_in_charge','editors',]
     def get_success_url(self):
         return reverse_lazy('archas:as_detail', kwargs={'slug': getattr(self.object,'id')})
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['realms'] = ArchitectureRealm.objects.all()
+        return context
 
 class TargetArchitectureUpdate(UpdateView):
     model = AutomatedSystem
@@ -55,6 +107,7 @@ class TargetArchitectureUpdate(UpdateView):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         context['automated_system'] = self.object
+        context['realms'] = ArchitectureRealm.objects.all()
         return context
 
 class InteractionsListUpdate(ListView):
@@ -68,6 +121,7 @@ class InteractionsListUpdate(ListView):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         context['automated_system'] = get_object_or_404(AutomatedSystem, id=self.kwargs['automated_system_id'])
+        context['realms'] = ArchitectureRealm.objects.all()
         return context
 
 
@@ -77,6 +131,12 @@ class InteractionUpdate(UpdateView):
     slug_field = 'id'
     slug_url_kwarg = 'interaction_id'
     template_name = 'archas/interaction_update.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        automated_system_id = Interaction.objects.get(pk=self.kwargs['interaction_id']).automated_system.id
+        context['automated_system'] = get_object_or_404(AutomatedSystem, id=automated_system_id)
+        context['realms'] = ArchitectureRealm.objects.all()
+        return context
     def get_success_url(self):
         automated_system_id = Interaction.objects.get(pk=self.kwargs['interaction_id']).automated_system.id
         return reverse_lazy('archas:int_list_update', kwargs={'automated_system_id': automated_system_id})
@@ -124,6 +184,7 @@ class InteractionCreate(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['automated_system'] = get_object_or_404(AutomatedSystem, id=self.kwargs['automated_system_id'])
+        context['realms'] = ArchitectureRealm.objects.all()
         return context
     def form_valid(self, form):
         form.instance.automated_system = get_object_or_404(AutomatedSystem, id=self.kwargs['automated_system_id'])
@@ -222,7 +283,7 @@ def arachas_base(request, *args):
 def as_view(request, *args):
     return render(request, 'archas/archas_as_view.html')
 
-def category_view(request, *args):
+def category_view_old(request, *args):
     return render(request, 'archas/archas_category_view.html')
 
 def confluence(request, *args):
